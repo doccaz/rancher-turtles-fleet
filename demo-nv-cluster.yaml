@@ -4,7 +4,7 @@ metadata:
   labels:
     ccm: external
     csi: external
-  name: demo-nv-cluster
+  name: demo-cluster
   namespace: emendonca
 spec:
   clusterNetwork:
@@ -14,16 +14,16 @@ spec:
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta1
     kind: KubeadmControlPlane
-    name: demo-nv-cluster-control-plane
+    name: demo-cluster-control-plane
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
     kind: AWSCluster
-    name: demo-nv-cluster
+    name: demo-cluster
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: AWSCluster
 metadata:
-  name: demo-nv-cluster
+  name: demo-cluster
   namespace: default
 spec:
   region: us-east-1
@@ -32,7 +32,7 @@ spec:
 apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 kind: KubeadmControlPlane
 metadata:
-  name: demo-nv-cluster-control-plane
+  name: demo-cluster-control-plane
   namespace: default
 spec:
   kubeadmConfigSpec:
@@ -57,14 +57,14 @@ spec:
     infrastructureRef:
       apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
       kind: AWSMachineTemplate
-      name: demo-nv-cluster-control-plane
+      name: demo-cluster-control-plane
   replicas: 1
   version: 1.28.10+rke2r1
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: AWSMachineTemplate
 metadata:
-  name: demo-nv-cluster-control-plane
+  name: demo-cluster-control-plane
   namespace: default
 spec:
   template:
@@ -76,10 +76,10 @@ spec:
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: demo-nv-cluster-md-0
+  name: demo-cluster-md-0
   namespace: default
 spec:
-  clusterName: demo-nv-cluster
+  clusterName: demo-cluster
   replicas: 0
   selector:
     matchLabels: null
@@ -89,18 +89,18 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: demo-nv-cluster-md-0
-      clusterName: demo-nv-cluster
+          name: demo-cluster-md-0
+      clusterName: demo-cluster
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
         kind: AWSMachineTemplate
-        name: demo-nv-cluster-md-0
+        name: demo-cluster-md-0
       version: 1.28.10+rke2r1
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: AWSMachineTemplate
 metadata:
-  name: demo-nv-cluster-md-0
+  name: demo-cluster-md-0
   namespace: default
 spec:
   template:
@@ -112,7 +112,7 @@ spec:
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
-  name: demo-nv-cluster-md-0
+  name: demo-cluster-md-0
   namespace: default
 spec:
   template:
