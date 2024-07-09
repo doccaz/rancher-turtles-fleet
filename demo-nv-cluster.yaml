@@ -5,7 +5,7 @@ metadata:
     ccm: external
     csi: external
   name: demo-nv-cluster
-  namespace: default
+  namespace: emendonca
 spec:
   clusterNetwork:
     pods:
